@@ -22041,7 +22041,7 @@ stickerBookButton.onclick=function(e){
             desc:'Absorb goo to conjure up a delectable arsenal of gummy wrecking balls. Cover the field in goo and collect pollen with a giant gummyball. Ricochet off Marks and Honey Tokens to build up your gummyball combo for massive gooey gains. Jump to release your gummyball prematurely in a field.',
             cost:['10000000000000 honey','500 glue','2500 gumdrops','25 causticWax','5 turpentine']
         },
-               stickerWand:{
+                    stickerWand:{
             collectPattern:[[0,0],[0,-1],[1,0],[-1,0]],
             collectAmount:5,
             cooldown:1,
@@ -22051,7 +22051,7 @@ stickerBookButton.onclick=function(e){
             },
             desc:'A magical wand that has a 1% chance to find a random sticker when harvesting.',
             cost:['100000 honey']
-        }
+        },
         
     }
     
