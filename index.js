@@ -947,7 +947,7 @@ function BeeSwarmSimulator(DATA){
         }
     }
     
-
+console.log('Sticker Book handler setup')
 stickerBookButton.onclick=function(e){
 
     let stickerBookPage=pages.length-1
