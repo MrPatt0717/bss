@@ -603,6 +603,7 @@ function BeeSwarmSimulator(DATA){
     let settingsButton=document.getElementById('settingsButton')
     let beequipButton=document.getElementById('beequipButton')
     let catalogButton=document.getElementById('catalogButton')
+    let stickerBookButton=document.getElementById('stickerBookButton')
     let pages=document.getElementsByClassName('uiPage')
     let currentPage=null
     let hotbarSlots=document.getElementsByClassName('hotbarSlot')
