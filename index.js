@@ -22011,7 +22011,21 @@ function BeeSwarmSimulator(DATA){
             desc:'Absorb goo to conjure up a delectable arsenal of gummy wrecking balls. Cover the field in goo and collect pollen with a giant gummyball. Ricochet off Marks and Honey Tokens to build up your gummyball combo for massive gooey gains. Jump to release your gummyball prematurely in a field.',
             cost:['10000000000000 honey','500 glue','2500 gumdrops','25 causticWax','5 turpentine']
         },
+        stickerWand:{
+    collectPattern:[[0,0],[0,-1],[1,0],[-1,0]],
+    collectAmount:5,
+    cooldown:1,
+    mesh:function(box,cylinder,sphere,star){
+    box(-0.3,0,0.6,0.1,0.1,0.8,false,[0.5,0.2,0])
+    sphere(-0.3,0,1.2,0.2,false,[0.7,0.3,1])
+}
+    },
+    desc:'A magical wand that has a 1% chance to find a random sticker when harvesting.',
+    cost:['100000 honey']
+}
+        
     }
+    
 
     player=(function(out){
 
@@ -26991,7 +27005,30 @@ out.initStickerData()
                     arr=p.slice()
                     
                     collectPollen({x:player.flowerIn.x,z:player.flowerIn.z,pattern:p,amount:gear.tool[out.currentGear.tool].collectAmount,yOffset:1.5,stackHeight:0.75,isGummyBaller:out.currentGear.tool==='gummyBaller',multiplier:player.pollenFromTools})
-                    
+                    if(out.currentGear.tool==='stickerWand' && Math.random()<0.01){
+
+    let stickerRarity=Math.random()
+    let rarity
+
+    if(stickerRarity<0.50) rarity='Uncommon'
+    else if(stickerRarity<0.75) rarity='Somewhat Rare'
+    else if(stickerRarity<0.90) rarity='Rare'
+    else if(stickerRarity<0.98) rarity='Very Rare'
+    else rarity='Extremely Rare'
+
+    let stickerPools={
+        'Uncommon':['Basic Sticker'],
+        'Somewhat Rare':['Leaf Sticker'],
+        'Rare':['Flower Sticker'],
+        'Very Rare':['Star Sticker'],
+        'Extremely Rare':['Blowing Leaf Sticker']
+    }
+
+    let pool=stickerPools[rarity]
+    let sticker=pool[Math.floor(Math.random()*pool.length)]
+
+    player.addSticker(sticker,rarity)
+}
                 }
                 
                 if(gear.tool[out.currentGear.tool].ability) gear.tool[out.currentGear.tool].ability(arr)
