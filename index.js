@@ -951,7 +951,7 @@ function BeeSwarmSimulator(DATA){
 stickerBookButton.onclick=function(e){
 
     let stickerBookPage=pages.length-1
-
+console.log('Sticker Book page:',stickerBookPage,'Total pages:',pages.length)
     if(currentPage!==stickerBookPage){
 
         if(currentPage!==null)
