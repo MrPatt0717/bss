@@ -954,7 +954,7 @@ stickerBookButton.onclick=function(e){
         if(currentPage!==null)
         pages[currentPage].style.display='none'
 
-        currentPage=6
+        currentPage=pages.length-1
         pages[currentPage].style.display='block'
 
         player.itemDragging=false
