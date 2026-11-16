@@ -946,6 +946,31 @@ function BeeSwarmSimulator(DATA){
             player.beequipDragging=false
         }
     }
+    
+stickerBookButton.onclick=function(e){
+
+    if(currentPage!==6){
+
+        if(currentPage!==null)
+        pages[currentPage].style.display='none'
+
+        currentPage=6
+        pages[currentPage].style.display='block'
+
+        player.itemDragging=false
+        player.beequipDragging=false
+        player.beequipLookingAt=false
+
+    } else {
+
+        pages[currentPage].style.display='none'
+        currentPage=null
+
+        player.itemDragging=false
+        player.beequipDragging=false
+    }
+}
+
 
     let world=new CANNON.World(),
     raycastWorld=new CANNON.World()
