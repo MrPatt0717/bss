@@ -22021,6 +22021,71 @@ function BeeSwarmSimulator(DATA){
         
         out.extraInfo={beequipIds:0,enablePollenText:true,drives:{red:0,blue:0,white:0,glitched:0},freeRoboPass:0,freeStickbugPass:0}
         
+out.initStickerData=function(){
+
+    if(!out.extraInfo.stickers){
+        out.extraInfo.stickers={
+            capacity:32,
+            owned:[],
+            inbox:[]
+        }
+    }
+
+    let s=out.extraInfo.stickers
+
+    if(!Array.isArray(s.owned)) s.owned=[]
+    if(!Array.isArray(s.inbox)) s.inbox=[]
+    if(typeof s.capacity!=='number') s.capacity=32
+
+    s.inbox=s.inbox.filter(sticker=>sticker.expires>Date.now())
+}
+
+out.addSticker=function(name,rarity){
+
+    out.initStickerData()
+
+    let s=out.extraInfo.stickers
+    let sticker={
+        name:name,
+        rarity:rarity
+    }
+
+    if(s.owned.length<s.capacity){
+
+        s.owned.push(sticker)
+        out.addMessage('New Sticker: '+name,[255,210,40])
+
+    } else {
+
+        s.inbox.push({
+            ...sticker,
+            expires:Date.now()+10*60*1000
+        })
+
+        out.addMessage('Sticker sent to your overflow inbox!',[255,180,40])
+    }
+}
+
+out.claimSticker=function(index){
+
+    out.initStickerData()
+
+    let s=out.extraInfo.stickers
+
+    if(s.owned.length>=s.capacity) return false
+    if(!s.inbox[index]) return false
+
+    s.owned.push({
+        name:s.inbox[index].name,
+        rarity:s.inbox[index].rarity
+    })
+
+    s.inbox.splice(index,1)
+    return true
+}
+
+out.initStickerData()
+
         out.startStickbugChallenge=()=>new Stickbug()
 
         out.computeMapDetails=function(){
@@ -33726,6 +33791,7 @@ function BeeSwarmSimulator(DATA){
         }
         
         player.extraInfo=save.extraInfo
+        player.initStickerData()
         player.honey=save.honey
         player.pollen=save.pollen
         player.currentGear=save.currentGear
