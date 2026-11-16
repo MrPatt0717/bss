@@ -947,15 +947,18 @@ function BeeSwarmSimulator(DATA){
         }
     }
     
+
 stickerBookButton.onclick=function(e){
 
-    if(currentPage!==6){
+    let stickerBookPage=pages.length-1
+
+    if(currentPage!==stickerBookPage){
 
         if(currentPage!==null)
-        pages[currentPage].style.display='none'
+            pages[currentPage].style.display='none'
 
-        currentPage=pages.length-1
-        pages[currentPage].style.display='block'
+        currentPage=stickerBookPage
+        pages[stickerBookPage].style.display='block'
 
         player.itemDragging=false
         player.beequipDragging=false
@@ -970,6 +973,7 @@ stickerBookButton.onclick=function(e){
         player.beequipDragging=false
     }
 }
+
 
 
     let world=new CANNON.World(),
